@@ -103,4 +103,39 @@ public class Library {
 		else
 			return false;
 	}
+	
+	public static boolean isPerfectnumber(int n) {
+		int sum = 0;
+		for(int i = 1; i < n; i++)
+			if(n % i == 0)
+				sum+=i;
+		if(sum==n)
+			return true;
+		else
+			return false;
+	}
+	
+	public static ArrayList<Integer> findFactor(int n){
+		ArrayList<Integer> ans = new ArrayList<Integer>();
+		for(int i = 1; i <= n; i++)
+			if(n % i == 0)
+				ans.add(i);
+		return ans;
+	}
+	
+	public static boolean isHappyNumber(int n) {
+		int sum = 0;
+		while(n>9){
+			while(n>0) {
+				sum+=Math.pow(n%10, 2);
+				n=n/10;
+			}
+			n = sum;
+			sum = 0;
+		}
+		if(n == 1 || n == 7 ) 
+			return true;
+		else
+			return false;
+	}
 }
