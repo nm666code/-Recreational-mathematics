@@ -29,8 +29,10 @@ public class Library {
 	}
 	
 	public static ArrayList<Integer> primeFactorization(int n) {
+		
 		ArrayList<Integer> ans = new ArrayList<Integer>();
 		int i = 0;
+		
 		do{
 			//如果質數p能整除n就ans加入p之後n=n/p
 			if(n % smallerPrime(n).get(i) == 0) {
@@ -40,19 +42,24 @@ public class Library {
 			else 
 				i++;
 		}while(n!=1);
+		
 		return ans;
 	}
 	
 	public static int gcd(int a,int b) {
+		
 		//if (a<b) a%b=a 相當於是交換
 		return a%b!=0?gcd(b ,a%b):b; 
 	}
 	
 	public static int gcd(int... numbers) {
+		
 		int ans=numbers[0];
+		
 		for(int i=1;i<numbers.length;i++) { 
 			ans=gcd(ans,numbers[i]); 
 		}
+		
 		return ans;
 	}
 	
@@ -61,29 +68,38 @@ public class Library {
     }
     
 	public static int lcm(int... numbers) {
+		
 		int k=numbers[0];
+		
 		for(int i=1;i<numbers.length;i++) { 
 			k=lcm(k,numbers[i]); 
 		}
+		
 		return k;
 	}
 	
 	public static int EulerTotientFunction(int n) {
-		ArrayList<Integer> ans = new ArrayList<Integer>();		
+		
+		ArrayList<Integer> ans = new ArrayList<Integer>();	
+		
 		for(int i = 1; i <= n;i++ ) 
 			ans.add(i);
 		//用set過濾重複的質因數
         LinkedHashSet<Integer> hashSet = new LinkedHashSet<>(primeFactorization(n));
+        
 		for(int prime:hashSet) 
 			for(int j = 1; prime*j <= n; j++ )
 				if(ans.contains(prime*j))
 					ans.remove(ans.indexOf(prime*j));
+		
 		return ans.size();
 	}
 	
 	public static boolean isdihedralPrime(int n) {
+		
 		if(!isPrime(n))
 			return false;
+		
 		int symmetry = 0;
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		map.put(0, 0); map.put(1, 1); map.put(2, 5); map.put(5, 2); map.put(8, 8);
@@ -105,12 +121,16 @@ public class Library {
 	}
 	
 	public static boolean isPerfectnumber(int n) {
+		
 		int sum = 0;
+		
 		for(int i = 1; i < n; i++)
 			if(n % i == 0)
 				sum+=i;
+		
 		if(sum==n)
 			return true;
+		
 		else
 			return false;
 	}
@@ -173,5 +193,24 @@ public class Library {
 					ans.remove(k);
 		}
 		return ans;
+	}
+	
+	public static boolean isHarshadnumber(int n) {
+		
+		int digitsum = 0, temp =n;
+		
+		if(n<=9)
+			return true;
+		
+		while(temp > 0) {
+			digitsum += temp % 10;
+			temp /= 10;
+		}
+		
+		if(n % digitsum ==0)
+			return true;
+		
+		else
+			return false;
 	}
 }
