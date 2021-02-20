@@ -116,26 +116,62 @@ public class Library {
 	}
 	
 	public static ArrayList<Integer> findFactor(int n){
+		
 		ArrayList<Integer> ans = new ArrayList<Integer>();
+		
 		for(int i = 1; i <= n; i++)
 			if(n % i == 0)
 				ans.add(i);
+		
 		return ans;
 	}
 	
 	public static boolean isHappyNumber(int n) {
+		
 		int sum = 0;
+		
 		while(n>9){
+			
 			while(n>0) {
+				
 				sum+=Math.pow(n%10, 2);
 				n=n/10;
+			
 			}
+			
 			n = sum;
 			sum = 0;
 		}
+		
 		if(n == 1 || n == 7 ) 
 			return true;
 		else
 			return false;
+	}
+	
+	public static ArrayList<Integer> smallerLuckyNumber(int n){
+		
+		ArrayList<Integer> ans = new ArrayList<Integer>();
+		
+		for(int i = 0; i*2+1 <= n;i++ ) 
+			//р案计奔
+			ans.add(i*2+1);
+		
+		for(int i = 1; i < ans.size(); i++) {
+			int j = 1;
+			
+			while(ans.get(i)*j-1 < ans.size()) {
+				//材n兜计奔干箂
+				ans.remove(ans.get(i)*j-1);
+				ans.add(ans.get(i)*j-1, 0);
+				j++;
+			}
+			
+			for(int k = 0; k < ans.size() ; k++) 
+				if(ans.get(k)==0)
+					//┮Τ干箂计奔
+					ans.remove(k);
+		}
+		return ans;
 	}
 }
